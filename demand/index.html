@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>U.S. electricity demand forecast (2022 vs 2025 vintage)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.plot.ly/plotly-2.35.0.min.js"></script>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  :root{--navy:#182655;--accent:#E8833A;--muted:#5a606b;--faint:#9aa0ab;}
+  body{font-family:'Inter',-apple-system,sans-serif;background:#fff;color:#23262e;-webkit-font-smoothing:antialiased;padding:14px 16px;}
+  .ttl{font-size:16px;font-weight:800;color:var(--navy);line-height:1.3;}
+  .sub{font-size:12.5px;color:var(--muted);margin-top:4px;line-height:1.45;}
+  #chart{width:100%;height:300px;margin-top:8px;}
+  .src{font-size:11px;color:var(--faint);margin-top:6px;line-height:1.4;}
+</style>
+</head>
+<body>
+  <div class="ttl">U.S. electricity demand is inflecting after fifteen flat years</div>
+  <div class="sub">Five-year load-growth forecast, by forecast vintage (GW)</div>
+  <div id="chart"></div>
+  <div class="src">Source: Grid Strategies, <em>Power Demand Forecasts Revised Up for Third Year Running</em> (Nov 2025).</div>
+<script>
+  const NAVY='#182655',ACCENT='#E8833A',GRAY='#cfd3dc';
+  const FONT={family:'Inter, sans-serif',size:12,color:'#23262e'};
+  Plotly.newPlot('chart',[{
+    type:'bar',x:['2022 forecast','2025 forecast (by 2030)'],y:[24,166],
+    marker:{color:[GRAY,ACCENT]},
+    text:['24 GW','166 GW'],textposition:'outside',
+    textfont:{family:'Inter, sans-serif',size:14,color:NAVY},
+    hovertemplate:'%{x}<br><b>%{y} GW</b> five-year load growth<extra></extra>',width:0.5
+  }],{
+    font:FONT,margin:{l:48,r:16,t:30,b:34},
+    yaxis:{title:'GW of five-year load growth',range:[0,190],gridcolor:'#eef0f3',zeroline:false},
+    annotations:[{x:1,y:166,yshift:30,text:'≈ 7× higher',showarrow:false,
+      font:{family:'Inter, sans-serif',size:13,color:ACCENT}}],
+    paper_bgcolor:'#fff',plot_bgcolor:'#fff'
+  },{responsive:true,displayModeBar:false});
+  window.addEventListener('resize',()=>Plotly.Plots.resize('chart'));
+</script>
+</body>
+</html>
