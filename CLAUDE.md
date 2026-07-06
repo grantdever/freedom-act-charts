@@ -18,6 +18,16 @@ When the user asks you to publish it, push it to a **new public GitHub repo** an
 - **Each subfolder becomes its own embeddable URL** (that's how iframes work — they point
   at a URL/path, not a repo, so one repo serves several embeddable charts).
 
+## Scope — FREEDOM Act charts only
+
+This repo hosts **only** the charts embedded in the FREEDOM Act blog post: `burden/`,
+`demand/`, and `scatter/`. The Texas buildout charts (`texas/`, `supply/`) that live
+alongside these in the `EnergyAffordabilityAgenda` repo (`viz/freedom-act-charts/`) are
+**not** for the FREEDOM Act piece — they belong to the broader Energy Affordability
+project. The two projects overlap but are not the same thing. When syncing updates from
+the working copy, do not add `texas/` or `supply/` (or their cards on the root
+`index.html`) here.
+
 ## Step 0 — Publish safety (required; do this first)
 This will be **public**. Run this from the directory and confirm it prints `clean`:
 ```bash
