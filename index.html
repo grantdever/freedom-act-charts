@@ -12,20 +12,40 @@
   :root{--navy:#182655;--blue:#4361A4;--accent:#E8833A;--gray:#cfd3dc;--muted:#5a606b;--faint:#9aa0ab;--rule:#e6e8ec;}
   body{font-family:'Inter',-apple-system,sans-serif;background:#f6f7f9;color:#23262e;-webkit-font-smoothing:antialiased;}
   .wrap{max-width:760px;margin:0 auto;padding:32px 18px 64px;}
+  .pagehead{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;}
   h1{font-size:26px;font-weight:800;color:var(--navy);line-height:1.2;}
+  .brand{flex-shrink:0;display:block;line-height:0;transition:opacity .2s ease;margin-top:4px;}
+  .brand:hover{opacity:.7;}
+  .brand-logo{height:26px;width:auto;display:block;mix-blend-mode:multiply;}
+  @media(max-width:480px){.brand-logo{height:18px;}}
   .intro{font-size:14px;color:var(--muted);margin:8px 0 24px;line-height:1.5;}
+  .credit{margin-top:8px;padding-top:14px;border-top:1px solid var(--rule);font-size:12px;color:var(--faint);}
+  .credit a{color:var(--blue);text-decoration:none;font-weight:600;}
+  .credit a:hover{text-decoration:underline;}
   .card{background:#fff;border:1px solid var(--rule);border-radius:10px;padding:16px 18px;margin-bottom:22px;}
   .ttl{font-size:16px;font-weight:800;color:var(--navy);line-height:1.3;}
   .sub{font-size:12.5px;color:var(--muted);margin-top:4px;line-height:1.45;}
   .chart{width:100%;margin-top:8px;}
   .src{font-size:11px;color:var(--faint);margin-top:6px;line-height:1.4;}
+  .method{margin-top:12px;font-size:11px;color:var(--muted);line-height:1.55;background:#f7f8fa;border:1px solid var(--rule);border-radius:6px;padding:12px 14px;}
+  .method h2{font-size:11px;font-weight:700;color:#333;margin:0 0 6px;}
+  .method p{margin:0 0 7px;}
+  .method p:last-child{margin-bottom:0;}
+  .method strong{color:#333;}
+  .method a{color:var(--blue);text-decoration:none;font-weight:600;}
+  .method a:hover{text-decoration:underline;}
   .embed{font-size:11px;color:var(--faint);margin-top:10px;border-top:1px dashed var(--rule);padding-top:8px;}
   .embed code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10.5px;color:var(--blue);}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <h1>Energy affordability charts</h1>
+  <header class="pagehead">
+    <h1>Energy affordability charts</h1>
+    <a class="brand" href="https://www.freopp.org" target="_blank" rel="noopener" aria-label="Visit FREOPP">
+      <img class="brand-logo" src="freopp-logo.png" alt="FREOPP" width="131" height="26">
+    </a>
+  </header>
   <p class="intro">Three interactive charts on U.S. electricity affordability and demand. Each is also published as its own page for embedding — the path under each chart is its standalone, iframe-ready URL.</p>
 
   <div class="card">
@@ -38,19 +58,56 @@
 
   <div class="card">
     <div class="ttl">U.S. electricity demand is inflecting after fifteen flat years</div>
-    <div class="sub">Five-year load-growth forecast, by forecast vintage (GW)</div>
+    <div class="sub">Projected growth in U.S. summer peak demand, 2025&ndash;2030, by forecast vintage (GW)</div>
     <div id="c2" class="chart" style="height:300px;"></div>
-    <div class="src">Source: Grid Strategies, <em>Power Demand Forecasts Revised Up for Third Year Running</em> (Nov 2025).</div>
+    <div class="src">Source: Grid Strategies, <em>Power Demand Forecasts Revised Up for Third Year Running</em> (Nov 2025), p.&nbsp;3. Both bars show projected growth in peak summer demand from 2025 to 2030, as reported in utilities' FERC Form 714 filings.</div>
     <div class="embed">Embed path: <code>/demand/</code></div>
   </div>
 
   <div class="card">
-    <div class="ttl">Where demand rose, real prices held &mdash; where it didn't, they jumped</div>
-    <div class="sub">U.S. states: electricity demand change vs. real residential price change, 2019&ndash;2025. Bubble size = bottom-20% energy burden.</div>
-    <div id="c3" class="chart" style="height:470px;"></div>
-    <div class="src">Source: EIA retail sales (deflated by CPI-U); U.S. Census ACS PUMS.</div>
+    <div class="ttl">Where demand rose, real prices held.</div>
+    <div class="sub">U.S. states: electricity demand change vs. real residential price change, 2019&ndash;2025, and bottom quintile energy burden.</div>
+    <div id="c3" class="chart" style="height:500px;"></div>
+    <div class="src">EIA retail sales (deflated by CPI-U); U.S. Census ACS PUMS.</div>
+
+    <section class="method">
+      <h2>Methodology &amp; data</h2>
+      <p>Across states, demand growth and real residential price growth are mildly <strong>negatively</strong> correlated (Pearson r &asymp; &minus;0.45). The fastest-demand-growth states have largely held real prices flat or lower, while the largest real increases are in states where demand was flat or falling. The reasons for rising energy prices are multi-factorial. This analysis will be updated as more recent data is uploaded to EIA.</p>
+      <p><strong>Sources:</strong> EIA, <a href="https://www.eia.gov/electricity/sales_revenue_price/" target="_blank" rel="noopener">Electricity Sales, Revenue, and Average Price</a>, via the <a href="https://www.eia.gov/opendata/browser/electricity/retail-sales" target="_blank" rel="noopener">EIA Open Data API</a> (2019&ndash;2025); <a href="https://fred.stlouisfed.org/series/CPIAUCSL" target="_blank" rel="noopener">CPI-U, All Items</a> (FRED, CPIAUCSL) for the inflation adjustment; U.S. Census Bureau, <a href="https://www.census.gov/programs-surveys/acs/microdata.html" target="_blank" rel="noopener">ACS PUMS</a> (2024) for energy burden.</p>
+    </section>
+
     <div class="embed">Embed path: <code>/scatter/</code></div>
   </div>
+
+  <div class="card">
+    <div class="ttl">Texas built capacity faster than demand grew, and real prices held</div>
+    <div class="sub">Texas electricity demand, supply (installed capacity), and real residential price, indexed to 2015 = 100. Demand rose 28.8% while Texas added installed capacity faster still (+43.7%, ~51 GW); the real (inflation-adjusted) residential price fell 2.4%.</div>
+    <div id="c4" class="chart" style="height:360px;"></div>
+    <div class="src">Source: EIA — total retail electricity sales (demand), installed net summer capacity (supply), and residential price deflated by CPI-U (real, constant 2024 dollars).</div>
+
+    <section class="method">
+      <h2>Methodology &amp; data</h2>
+      <p>All three series are indexed to 2015 = 100. Demand is total retail electricity sales (all sectors); <strong>supply is installed generating capacity</strong> (net summer capability, all fuels, all sectors); price is the average residential price in constant 2024 dollars (CPI-U, all items). We use installed capacity rather than net generation as the supply measure: net generation moves with demand almost by identity, so it can't independently show that supply kept pace, while capacity is the stock of productive capital. (Texas net generation, an output measure, grew about 26% over this window.) Over the decade Texas added roughly a third more demand and built capacity faster still, while real residential prices ended slightly lower. Sources: EIA <a href="https://www.eia.gov/electricity/sales_revenue_price/" target="_blank" rel="noopener">Electricity Sales, Revenue, and Average Price</a> and <a href="https://www.eia.gov/electricity/data/state/" target="_blank" rel="noopener">State Electricity Profiles</a> (net summer capability), via the EIA Open Data API (2015&ndash;2024); <a href="https://fred.stlouisfed.org/series/CPIAUCSL" target="_blank" rel="noopener">CPI-U, All Items</a> (FRED, CPIAUCSL).</p>
+    </section>
+
+    <div class="embed">Embed path: <code>/texas/</code></div>
+  </div>
+
+  <div class="card">
+    <div class="ttl">Texas built new supply. The country mostly didn't.</div>
+    <div class="sub">Installed generating capacity, indexed to 2015 = 100. Over the decade Texas grew capacity 43.7% (~51 GW); the U.S. as a whole grew just 15.6% &mdash; even as forecasters now expect demand to surge.</div>
+    <div id="c5" class="chart" style="height:360px;"></div>
+    <div class="src">Source: EIA installed net summer capacity (all fuels, all sectors). Load-growth forecast: Grid Strategies (2025).</div>
+
+    <section class="method">
+      <h2>Methodology &amp; data</h2>
+      <p>Both lines are installed generating capacity (net summer capability, all fuels, all sectors), indexed to 2015 = 100. Texas grew capacity <strong>43.7%</strong> (~51 GW) over the decade &mdash; outpacing its ~29% demand growth &mdash; while U.S. capacity grew just 15.6%. We use installed capacity, not net generation, as the supply measure: generation tracks demand almost by identity and can't show whether supply kept pace. The U.S. added about <strong>166 GW</strong> of capacity over this entire decade, yet Grid Strategies now projects roughly that same 166 GW of load growth in just <strong>five years</strong> &mdash; so meeting it will require building much faster, closer to Texas's pace than the country's recent average. Sources: EIA <a href="https://www.eia.gov/electricity/data/state/" target="_blank" rel="noopener">State Electricity Profiles</a> (net summer capability), via the EIA Open Data API (2015&ndash;2024); Grid Strategies, <em>Power Demand Forecasts Revised Up for Third Year Running</em> (2025).</p>
+    </section>
+
+    <div class="embed">Embed path: <code>/supply/</code></div>
+  </div>
+
+  <div class="credit">Analysis by <a href="https://www.freopp.org" target="_blank" rel="noopener">FREOPP</a></div>
 </div>
 
 <script>
@@ -70,11 +127,11 @@
 
   // 2 — demand
   Plotly.newPlot('c2',[{
-    type:'bar',x:['2022 forecast','2025 forecast (by 2030)'],y:[24,166],marker:{color:[GRAY,ACCENT]},
+    type:'bar',x:['2022 Forecast','2025 Forecast'],y:[24,166],marker:{color:[GRAY,ACCENT]},
     text:['24 GW','166 GW'],textposition:'outside',textfont:{family:'Inter, sans-serif',size:14,color:NAVY},
-    hovertemplate:'%{x}<br><b>%{y} GW</b> five-year load growth<extra></extra>',width:0.5
+    hovertemplate:'%{x}<br><b>%{y} GW</b> projected 2025–2030 peak-load growth<extra></extra>',width:0.5
   }],{font:FONT,margin:{l:48,r:16,t:30,b:34},
-    yaxis:{title:'GW of five-year load growth',range:[0,190],gridcolor:'#eef0f3',zeroline:false},
+    yaxis:{title:'Projected 2025–2030 growth (GW)',range:[0,190],gridcolor:'#eef0f3',zeroline:false},
     annotations:[{x:1,y:166,yshift:30,text:'≈ 7× higher',showarrow:false,font:{family:'Inter, sans-serif',size:13,color:ACCENT}}],
     paper_bgcolor:'#fff',plot_bgcolor:'#fff'},CFG);
 
@@ -83,10 +140,12 @@
   const US=[6.5,5.6,9.8];
   const sized=b=>8+(b-5.5)*2.6;
   const group=g=>STATES.filter(s=>s[5]===g);
+  // Nudge labels off crowded/overlapping bubbles; default is top center.
+  const POS={NY:'middle right',NJ:'bottom center',MD:'top center',GA:'bottom center',LA:'middle left',VA:'middle right',AZ:'bottom center'};
   function trace(g,name,color,showLabel){
     const rows=group(g);
     return {type:'scatter',mode:showLabel?'markers+text':'markers',name,
-      x:rows.map(r=>r[2]),y:rows.map(r=>r[3]),text:rows.map(r=>r[0]),textposition:'top center',
+      x:rows.map(r=>r[2]),y:rows.map(r=>r[3]),text:rows.map(r=>r[0]),textposition:rows.map(r=>POS[r[0]]||'top center'),
       textfont:{family:'Inter, sans-serif',size:10,color:color},
       marker:{size:rows.map(r=>sized(r[4])),color:color,opacity:g==='other'?0.5:0.85,line:{color:'#fff',width:1}},
       customdata:rows.map(r=>[r[1],r[4]]),
@@ -94,23 +153,72 @@
   }
   Plotly.newPlot('c3',[
     trace('other','Other states',GRAY,false),
-    trace('contrast','Demand flat/down, prices up',BLUE,true),
-    trace('priority','High demand growth + high burden',ACCENT,true),
-    {type:'scatter',mode:'markers+text',name:'U.S. average',x:[US[0]],y:[US[1]],text:['U.S.'],textposition:'bottom center',
+    trace('contrast','Flat demand, prices up',BLUE,true),
+    trace('priority','High demand + burden',ACCENT,true),
+    {type:'scatter',mode:'markers+text',name:'U.S. average',x:[US[0]],y:[US[1]],text:['U.S.'],textposition:'top center',
       textfont:{family:'Inter, sans-serif',size:11,color:NAVY},
       marker:{symbol:'diamond',size:14,color:NAVY,line:{color:'#fff',width:1.5}},
       hovertemplate:'<b>United States</b><br>Demand: %{x:+.1f}%<br>Real price: %{y:+.1f}%<extra></extra>'}
-  ],{font:FONT,margin:{l:56,r:16,t:12,b:48},
-    xaxis:{title:'Electricity demand change, 2019–2025 (%)',ticksuffix:'%',gridcolor:'#eef0f3',zeroline:true,zerolinecolor:'#d4d8df'},
+  ],{font:FONT,margin:{l:56,r:16,t:12,b:62},
+    xaxis:{title:{text:'Electricity demand change, 2019–2025 (%)',standoff:12},ticksuffix:'%',gridcolor:'#eef0f3',zeroline:true,zerolinecolor:'#d4d8df'},
     yaxis:{title:'Real residential price change (%)',ticksuffix:'%',gridcolor:'#eef0f3',zeroline:false},
     shapes:[{type:'line',x0:-10,x1:45,y0:0,y1:0,line:{color:'#b8bdc7',width:1,dash:'dot'}}],
     annotations:[
       {x:36,y:-6,text:'Demand grew,<br>real prices held',showarrow:false,font:{family:'Inter, sans-serif',size:11,color:'#8a6a45'},align:'center'},
       {x:-2,y:30,text:'Demand fell,<br>prices jumped',showarrow:false,font:{family:'Inter, sans-serif',size:11,color:BLUE},align:'center'}],
-    legend:{orientation:'h',y:-0.18,x:0.5,xanchor:'center',font:{size:11}},
+    legend:{orientation:'h',y:-0.22,x:0.5,xanchor:'center',font:{size:11}},
     paper_bgcolor:'#fff',plot_bgcolor:'#fff',hovermode:'closest'},CFG);
 
-  window.addEventListener('resize',()=>['c1','c2','c3'].forEach(id=>Plotly.Plots.resize(id)));
+  // 4 — Texas demand, supply (installed capacity), real price (indexed 2015=100)
+  const txYears=[2015,2016,2017,2018,2019,2020,2021,2022,2023,2024];
+  const txDemand=[100.0,101.6,102.4,108.2,109.4,108.8,111.0,121.2,125.6,128.8];
+  const txCapacity=[100.0,101.3,105.4,104.3,106.8,110.1,119.3,127.1,132.3,143.7];
+  const txPrice=[100.0,93.9,92.1,91.4,94.3,92.7,91.6,96.4,97.3,97.6];
+  const txSales=[392.3,398.7,401.9,424.4,429.3,426.9,435.6,475.4,492.8,505.4];
+  const txGW=[117.1,118.7,123.5,122.2,125.1,128.9,139.8,148.9,155.0,168.3];
+  const txCents=[15.30,14.36,14.09,13.99,14.43,14.19,14.02,14.75,14.89,14.94];
+  Plotly.newPlot('c4',[
+    {type:'scatter',mode:'lines+markers',name:'Installed capacity (supply)',x:txYears,y:txCapacity,
+      line:{color:NAVY,width:3},marker:{size:6,color:NAVY},customdata:txGW,
+      hovertemplate:'<b>%{x}</b><br>Capacity index: %{y:.1f}<br>%{customdata:.0f} GW installed<extra></extra>'},
+    {type:'scatter',mode:'lines+markers',name:'Electricity demand',x:txYears,y:txDemand,
+      line:{color:ACCENT,width:3},marker:{size:6,color:ACCENT},customdata:txSales,
+      hovertemplate:'<b>%{x}</b><br>Demand index: %{y:.1f}<br>%{customdata:.0f} TWh sold<extra></extra>'},
+    {type:'scatter',mode:'lines+markers',name:'Real residential price',x:txYears,y:txPrice,
+      line:{color:BLUE,width:3},marker:{size:6,color:BLUE},customdata:txCents,
+      hovertemplate:'<b>%{x}</b><br>Real price index: %{y:.1f}<br>%{customdata:.1f}¢/kWh (2024$)<extra></extra>'}
+  ],{font:FONT,margin:{l:46,r:104,t:12,b:40},
+    xaxis:{range:[2014.6,2024.4],tick0:2015,dtick:2,gridcolor:'#eef0f3',zeroline:false},
+    yaxis:{title:'Index (2015 = 100)',range:[85,150],gridcolor:'#eef0f3',zeroline:false},
+    shapes:[{type:'line',x0:2015,x1:2024,y0:100,y1:100,line:{color:'#c4c8d0',width:1,dash:'dot'}}],
+    annotations:[
+      {x:2024,y:143.7,xanchor:'left',xshift:6,yshift:4,text:'Capacity <b>+43.7%</b>',showarrow:false,align:'left',font:{family:'Inter, sans-serif',size:10.5,color:NAVY}},
+      {x:2024,y:128.8,xanchor:'left',xshift:6,text:'Demand <b>+28.8%</b>',showarrow:false,align:'left',font:{family:'Inter, sans-serif',size:10.5,color:ACCENT}},
+      {x:2024,y:97.6,xanchor:'left',xshift:6,text:'Real price <b>−2.4%</b>',showarrow:false,align:'left',font:{family:'Inter, sans-serif',size:10.5,color:BLUE}}],
+    legend:{orientation:'h',y:-0.16,x:0.5,xanchor:'center',font:{size:11}},
+    paper_bgcolor:'#fff',plot_bgcolor:'#fff',hovermode:'x unified'},CFG);
+
+  // 5 — Texas vs. U.S. installed capacity (indexed 2015=100)
+  const usCapacity=[100.0,101.0,101.9,102.9,103.3,104.9,107.7,109.2,111.6,115.6];
+  const usGW=[1064,1074,1084,1095,1099,1116,1146,1161,1188,1230];
+  Plotly.newPlot('c5',[
+    {type:'scatter',mode:'lines+markers',name:'Texas',x:txYears,y:txCapacity,
+      line:{color:ACCENT,width:3},marker:{size:6,color:ACCENT},customdata:txGW,
+      hovertemplate:'<b>Texas — %{x}</b><br>Capacity index: %{y:.1f}<br>%{customdata:.0f} GW installed<extra></extra>'},
+    {type:'scatter',mode:'lines+markers',name:'United States',x:txYears,y:usCapacity,
+      line:{color:NAVY,width:3},marker:{size:6,color:NAVY},customdata:usGW,
+      hovertemplate:'<b>United States — %{x}</b><br>Capacity index: %{y:.1f}<br>%{customdata:.0f} GW installed<extra></extra>'}
+  ],{font:FONT,margin:{l:46,r:74,t:12,b:40},
+    xaxis:{range:[2014.6,2024.4],tick0:2015,dtick:2,gridcolor:'#eef0f3',zeroline:false},
+    yaxis:{title:'Installed capacity index (2015 = 100)',range:[95,150],gridcolor:'#eef0f3',zeroline:false},
+    shapes:[{type:'line',x0:2015,x1:2024,y0:100,y1:100,line:{color:'#c4c8d0',width:1,dash:'dot'}}],
+    annotations:[
+      {x:2024,y:143.7,xanchor:'left',xshift:6,text:'Texas<br><b>+43.7%</b>',showarrow:false,align:'left',font:{family:'Inter, sans-serif',size:11,color:ACCENT}},
+      {x:2024,y:115.6,xanchor:'left',xshift:6,text:'U.S.<br><b>+15.6%</b>',showarrow:false,align:'left',font:{family:'Inter, sans-serif',size:11,color:NAVY}}],
+    legend:{orientation:'h',y:-0.16,x:0.5,xanchor:'center',font:{size:11}},
+    paper_bgcolor:'#fff',plot_bgcolor:'#fff',hovermode:'x unified'},CFG);
+
+  window.addEventListener('resize',()=>['c1','c2','c3','c4','c5'].forEach(id=>Plotly.Plots.resize(id)));
 </script>
 </body>
 </html>
